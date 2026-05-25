@@ -1,13 +1,7 @@
 import "dotenv/config";
 import express from "express"
-import { PrismaClient } from "@prisma/client"
-import { PrismaPg } from "@prisma/adapter-pg";
-import pg from "pg";
+import prisma from "./src/lib/db.js"
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-const adapter = new PrismaPg(pool);
-
-const prisma = new PrismaClient({ adapter });
 const app = express()
 
 app.get("/", (req, res) => {
@@ -21,8 +15,8 @@ app.listen(3000, () => {
 async function createUser() {
   const newUser = await prisma.user.create({
     data: {
-      name: "Rashel",
-      email: "abc@gmail.com",
+      name: "Famous",
+      email: "efg@gmail.com",
       password: "123",
     }
   });
